@@ -1,0 +1,45 @@
+1. Build Docker Image
+Pindah ke direktori proyek (project-folder) di terminal, dan jalankan perintah berikut untuk membuat Docker image dari Dockerfile:
+
+bash
+Copy code
+docker build -t yaml-replacer .
+2. Jalankan Container
+Jalankan container dengan perintah berikut untuk menjalankan replace_yaml.py:
+
+bash
+Copy code
+docker run --rm -v $(pwd):/app yaml-replacer
+Penjelasan:
+
+--rm akan menghapus container setelah selesai.
+-v $(pwd):/app akan melakukan mounting direktori lokal ke direktori /app di dalam container, agar file hasil modifikasi docker-compose-modified.yml tersimpan di direktori host.
+
+3. Cek File Hasil
+Setelah container selesai berjalan, file docker-compose-modified.yml akan muncul di direktori lokal (project-folder). Berikut contoh hasil modifikasi:
+
+yaml
+Copy code
+version: '3'
+services:
+  app:
+    image: myapp:latest
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USER=new_user
+      - DB_PASS=new_password
+  db:
+    image: mysql:8.0
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=new_root_password
+      - MYSQL_USER=new_user
+      - MYSQL_PASSWORD=new_password
+      - MYSQL_DATABASE=new_database
+volumes:
+  db_data:
+  mysql_data:
+Ringkasan
+Setelah menjalankan semua langkah di atas, Anda akan memiliki docker-compose-modified.yml yang sudah dimodifikasi. Skrip Python ini akan otomatis menyesuaikan nilai-nilai yang Anda inginkan, dan file hasilnya siap digunakan untuk deployment atau testing lebih lanjut.
