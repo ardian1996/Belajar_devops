@@ -42,4 +42,4 @@ volumes:
   db_data:
   mysql_data:
 Ringkasan
-Setelah menjalankan semua langkah di atas, akan memiliki docker-compose-modified.yml yang sudah dimodifikasi. Skrip Python ini akan otomatis menyesuaikan nilai-nilai yang diinginkan, dan file hasilnya siap digunakan untuk deployment atau testing lebih lanjut.
+Setelah menjalankan semua langkah di atas, akan memiliki docker-compose-modified.yml yang sudah dimodifikasi. Skrip Python akan otomatis menyesuaikan nilai-nilai yang diinginkan, dan file hasilnya siap digunakan untuk deployment atau testing lebih lanjut.
